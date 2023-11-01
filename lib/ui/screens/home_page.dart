@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:session2/ui/widgets/drawer_widget.dart';
 import 'package:session2/utils/constants.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -10,10 +10,11 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var settingsBox = Hive.box(settings);
+     final strings = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Mars Photos",
+        strings.appTitle ,
           style: Theme.of(context).textTheme.displaySmall,
         ),
       ),
@@ -23,7 +24,7 @@ class HomePage extends StatelessWidget {
            color: Theme.of(context).colorScheme.inversePrimary,
           padding: const EdgeInsets.all(20),
           child:  Text(
-            "Mars Photos",
+           strings.appTitle,
             style: Theme.of(context).textTheme.bodyMedium,
             
           ),

@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
           supportedLocales: AppLocalizations.supportedLocales,
           locale:Locale(lang) ,
           debugShowCheckedModeBanner: false,
-          title: 'app Title',
+          title: 'appTitle',
           theme: ThemeData(
             colorScheme: lightColorScheme,
             useMaterial3: true,
