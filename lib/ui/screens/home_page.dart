@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:session2/ui/widgets/drawer_widget.dart';
 import 'package:session2/utils/constants.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:session2/utils/router_constants.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -20,16 +22,10 @@ class HomePage extends StatelessWidget {
       ),
       drawer: DrawerWidget(settingsBox: settingsBox),
       body: Center(
-        child: Container(
-           color: Theme.of(context).colorScheme.inversePrimary,
-          padding: const EdgeInsets.all(20),
-          child:  Text(
-           strings.appTitle,
-            style: Theme.of(context).textTheme.bodyMedium,
-            
-          ),
-         
-        ),
+        child:FilledButton(child: Text(strings.settings) , onPressed: (){
+          context.push(settingPage);
+        },
+        )
       )
     );
   }

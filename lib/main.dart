@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:session2/ui/screens/home_page.dart';
+import 'package:session2/utils/app_router.dart';
 import 'package:session2/utils/color_schemes.g.dart';
 import 'package:session2/utils/constants.dart';
 import 'package:session2/utils/typography%20.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:sizer/sizer.dart';
 
 void main() async {
   await Hive.initFlutter();
@@ -25,24 +25,29 @@ class MyApp extends StatelessWidget {
       builder: (__, value, child) {
         bool isDarkValue = Hive.box(settings).get(isDark, defaultValue: false);
         String lang = Hive.box(settings).get(language, defaultValue: "en");
-        return MaterialApp(
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
-          locale:Locale(lang) ,
-          debugShowCheckedModeBanner: false,
-          title: 'appTitle',
-          theme: ThemeData(
-            colorScheme: lightColorScheme,
-            useMaterial3: true,
-            textTheme: textTheme,
-          ),
-          darkTheme: ThemeData(
-            colorScheme: darkColorScheme,
-            useMaterial3: true,
-            textTheme: textTheme,
-          ),
-          home: const HomePage(),
-          themeMode: isDarkValue ? ThemeMode.dark : ThemeMode.light,
+        return Sizer(
+          builder: (context , orientation , deviceType) {
+            return MaterialApp.router(
+              
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
+              locale:Locale(lang) ,
+              debugShowCheckedModeBanner: false,
+              title: 'appTitle',
+              theme: ThemeData(
+                colorScheme: lightColorScheme,
+                useMaterial3: true,
+                textTheme: textTheme,
+              ),
+              darkTheme: ThemeData(
+                colorScheme: darkColorScheme,
+                useMaterial3: true,
+                textTheme: textTheme,
+              ),
+              routerConfig: goRouter(),
+              themeMode: isDarkValue ? ThemeMode.dark : ThemeMode.light,
+            );
+          }
         );
       },
     );
