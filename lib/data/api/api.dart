@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:dio/dio.dart';
 import 'package:dio_smart_retry/dio_smart_retry.dart';
@@ -9,10 +8,11 @@ class Api {
   Api(){
     _dio = Dio(
 BaseOptions(
-  connectTimeout:const Duration(seconds: 180),
-  receiveTimeout:const Duration(seconds: 180),
-  method: "GET",
-  baseUrl: "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity",
+    baseUrl: "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity",
+  connectTimeout:const Duration(seconds: 10),
+  receiveTimeout:const Duration(seconds: 10),
+  method: "GET",    
+
   receiveDataWhenStatusError: true,
   queryParameters: {
     "api_key":"yRGIraQQgX8BYn7SR5J0XTqo61k7ruBYexmxBwRe",
@@ -29,11 +29,11 @@ retryDelays:const [
  )
 );
   }
-  Future<List<Map<String , dynamic>>> fetchPhotos ()async{
+  Future<List<dynamic>> fetchPhotos ()async{
     try {
-      final Response response = await _dio.request("latest_photos");
+      final Response response = await _dio.request("/latest_photos");
+      print(response.statusCode.toString());
       final data = response.data['latest_photos'];
-      print(data);
       return data ;
     } catch (e) {
       if(e is DioException){

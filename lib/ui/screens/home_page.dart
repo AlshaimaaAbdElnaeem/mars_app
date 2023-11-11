@@ -22,8 +22,8 @@ class HomePage extends StatelessWidget {
       ),
       drawer: DrawerWidget(settingsBox: settingsBox),
       body: Center(
-        child:FilledButton(child: Text(strings.settings) , onPressed: (){
-          context.push(settingPage);
+        child:FilledButton(child: Text(strings.latestphoto) , onPressed: (){
+          context.push(latestPage);
         },
         )
       )
